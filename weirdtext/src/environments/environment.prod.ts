@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '???'
+  apiUrl: 'https://weirdtext-server.herokuapp.com/v1/'
 };
