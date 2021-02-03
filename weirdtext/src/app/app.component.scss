@@ -1,0 +1,15 @@
+.textbox {
+    border: 1px black dashed;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #666;
+    position: relative;
+}
+
+.copy-item {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #666;
+    cursor: pointer;
+}

@@ -1,0 +1,61 @@
+<div class="container">
+  <h2 class="text-center">Weirdtext encoder / decoder</h2>
+
+  <div class="row">
+    <!-- Input for message to encode -->
+    <div class="col-6">
+      <textarea [(ngModel)]="messageToEncode" class="form-control" rows="4"
+        placeholder="Put your message to encode here..."></textarea>
+      <div class="text-center">
+        <button (click)="encode()" class="btn btn-primary mt-2" [disabled]="messageToEncode.length == 0">Encode
+          message</button>
+      </div>
+    </div>
+
+    <!-- Input for message to decode -->
+    <div class="col-6">
+      <textarea [(ngModel)]="messageToDecode" class="form-control" rows="4"
+        placeholder="Put your message to decode here..."></textarea>
+      <textarea [(ngModel)]="listOfWords" class="form-control mt-2" rows="2"
+        placeholder="Include list of original words"></textarea>
+      <div class="text-center">
+        <button (click)="decode()" class="btn btn-primary mt-2"
+          [disabled]="messageToDecode.length == 0 || listOfWords.length == 0">Decode
+          message</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results of encoding / decoding -->
+  <div class="row">
+    <!-- Encoder info -->
+    <div class="col-6">
+      <div *ngIf="encodedMessage">
+        <h4 class="text-center">Encoded message</h4>
+        <div style="white-space: break-spaces;" class="textbox p-3">
+          <span (click)="copy()" [cdkCopyToClipboard]="encodedMessage" class="copy-item p-2">Copy</span>
+          {{encodedMessage}}
+        </div>
+        <h5 class="text-center mt-1">List of original words</h5>
+        <div class="textbox p-3">
+          <span (click)="copy()" [cdkCopyToClipboard]="originalWords" class="copy-item p-2">Copy</span>
+          {{originalWords}}
+        </div>
+        <div class="text-center">
+          <button (click)="fillDecoder()" matTooltip="Click to move encoded message to decoder"
+            class="btn btn-outline-primary">Put in decode
+            fields</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decoder info -->
+    <div class="col-6" style="white-space: break-spaces;">
+      <div *ngIf="decodedMessage">
+        <h4 class="text-center">Decoded message</h4>
+        <div class="textbox p-3">{{decodedMessage}}</div>
+      </div>
+    </div>
+
+  </div>
+</div>
