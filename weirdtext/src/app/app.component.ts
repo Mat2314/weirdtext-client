@@ -24,6 +24,7 @@ export class AppComponent {
 
   // Controlers
   public decodingError: boolean = false;
+  public validInput: boolean = true;
 
   constructor(private apiService: ApiService, private logService: LogService, private snackbar: MatSnackBar) { }
 
@@ -72,6 +73,12 @@ export class AppComponent {
 
   copy() {
     this.snackbar.open("Copied to clipboard", "Close", { duration: 5000 });
+  }
+
+  checkInput(event) {
+    var textToDecode: string = event.target.value;
+    var magicWordSeparator: string = "\n--weird--\n"
+    this.validInput = textToDecode.startsWith(magicWordSeparator) && textToDecode.endsWith(magicWordSeparator);
   }
 
 }

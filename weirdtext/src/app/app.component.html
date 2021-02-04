@@ -14,13 +14,15 @@
 
     <!-- Input for message to decode -->
     <div class="col-6">
-      <textarea [(ngModel)]="messageToDecode" class="form-control" rows="4"
-        placeholder="Put your message to decode here..."></textarea>
+      <textarea (keyup)="checkInput($event)" [(ngModel)]="messageToDecode" #decodeInput="ngModel" [ngClass]="decodeInput.touched || decodeInput.dirty ? validInput ? 'is-valid' : 'is-invalid' : ''"
+        class="form-control" rows="4" placeholder="Put your message to decode here..."></textarea>
+        <div *ngIf="decodeInput.touched || decodeInput.dirty && !validInput" class="invalid-feedback">The magic word separator is required. Add \n--weird--\n at the beginning and at the end of the message</div>
+
       <textarea [(ngModel)]="listOfWords" class="form-control mt-2" rows="2"
         placeholder="Include list of original words"></textarea>
       <div class="text-center">
         <button (click)="decode()" class="btn btn-primary mt-2"
-          [disabled]="messageToDecode.length == 0 || listOfWords.length == 0">Decode
+          [disabled]="!validInput || listOfWords.length == 0">Decode
           message</button>
       </div>
     </div>
