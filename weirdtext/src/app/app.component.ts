@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { config } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { LogService } from './services/log.service';
 
@@ -15,7 +14,7 @@ export class AppComponent {
   // User input
   public messageToEncode: string = "";
   public messageToDecode: string = "";
-  public listOfWords: Array<string> = [];
+  public listOfWords: string = "";
 
   // API output
   public encodedMessage: string = "";
@@ -46,7 +45,7 @@ export class AppComponent {
 
   decode() {
     // Send API request to decode message
-    this.apiService.decode(this.messageToDecode, this.listOfWords).subscribe(
+    this.apiService.decode(this.messageToDecode, this.listOfWords.split(',')).subscribe(
       res => {
         this.logService.log(res);
         if (res.ok) {
@@ -67,7 +66,7 @@ export class AppComponent {
   fillDecoder() {
     // Move encoded message and list of words to decoder fields
     this.messageToDecode = this.encodedMessage;
-    this.listOfWords = this.originalWords;
+    this.listOfWords = this.originalWords.toString();
     this.snackbar.open("Message moved to decoder", "Close", { duration: 5000 });
   }
 
