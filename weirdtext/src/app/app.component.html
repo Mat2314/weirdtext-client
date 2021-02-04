@@ -14,9 +14,11 @@
 
     <!-- Input for message to decode -->
     <div class="col-6">
-      <textarea (keyup)="checkInput($event)" [(ngModel)]="messageToDecode" #decodeInput="ngModel" [ngClass]="decodeInput.touched || decodeInput.dirty ? validInput ? 'is-valid' : 'is-invalid' : ''"
+      <textarea (keyup)="checkInput($event)" [(ngModel)]="messageToDecode" #decodeInput="ngModel"
+        [ngClass]="decodeInput.touched || decodeInput.dirty ? validInput ? 'is-valid' : 'is-invalid' : ''"
         class="form-control" rows="4" placeholder="Put your message to decode here..."></textarea>
-        <div *ngIf="decodeInput.touched || decodeInput.dirty && !validInput" class="invalid-feedback">The magic word separator is required. Add \n--weird--\n at the beginning and at the end of the message</div>
+      <div *ngIf="decodeInput.touched || decodeInput.dirty && !validInput" class="invalid-feedback">The magic word
+        separator is required. Add \n--weird--\n at the beginning and at the end of the message</div>
 
       <textarea [(ngModel)]="listOfWords" class="form-control mt-2" rows="2"
         placeholder="Include list of original words"></textarea>
@@ -24,7 +26,6 @@
         <button (click)="decode()" class="btn btn-primary mt-2"
           [disabled]="!validInput || listOfWords.length == 0">Decode
           message</button>
-          {{listOfWords}}
       </div>
     </div>
   </div>
