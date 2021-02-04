@@ -52,8 +52,9 @@
     <!-- Decoder info -->
     <div class="col-6" style="white-space: break-spaces;">
       <div *ngIf="decodedMessage">
-        <h4 class="text-center">Decoded message</h4>
-        <div class="textbox p-3">{{decodedMessage}}</div>
+        <h4 *ngIf="!decodingError" class="text-center">Decoded message</h4>
+        <h4 *ngIf="decodingError" class="text-center text-danger">Error occurred</h4>
+        <div [ngClass]="decodingError ? 'text-danger' : '' " class="textbox p-3">{{decodedMessage}}</div>
       </div>
     </div>
 

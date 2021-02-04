@@ -22,6 +22,9 @@ export class AppComponent {
   public decodedMessage: string = "";
   public originalWords: Array<string> = [];
 
+  // Controlers
+  public decodingError: boolean = false;
+
   constructor(private apiService: ApiService, private logService: LogService, private snackbar: MatSnackBar) { }
 
   encode() {
@@ -42,13 +45,17 @@ export class AppComponent {
 
   decode() {
     // Send API request to decode message
-    console.log(this.originalWords);
-    this.apiService.decode(this.messageToDecode, this.originalWords).subscribe(
+    this.apiService.decode(this.messageToDecode, this.listOfWords).subscribe(
       res => {
         this.logService.log(res);
         if (res.ok) {
           this.decodedMessage = res.decoded_message;
-          this.snackbar.open("Message sent to decode", "Close", { duration: 5000 });
+          this.decodingError = false;
+          this.snackbar.open(res.ok, "Close", { duration: 5000 });
+        } else if (res.error) {
+          this.decodingError = true;
+          this.decodedMessage = res.error_type;
+          this.snackbar.open(res.error, "Close", { duration: 5000 });
         }
       }, err => {
         this.logService.log(err);
